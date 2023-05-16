@@ -1,5 +1,9 @@
 <?php
-$conexao = mysqli_connect("localhost", "root", "", "crud");
+require_once "config.php";
+
+$bd = new BaseDeDados();
+$bd->connect();
+$conexao = $bd->getConnection();
 
 if (mysqli_connect_errno()) {
     echo "Falha ao conectar com o MySQL: " . mysqli_connect_error();
@@ -22,5 +26,6 @@ if (mysqli_query($conexao, $sql)) {
     echo "Erro ao salvar usuário: " . mysqli_error($conexao);
 }
 
-mysqli_close($conexao);
+$conexao->close();
+
 ?>
